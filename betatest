@@ -600,7 +600,7 @@ TabTeleports:AddDropdown({
         elseif Value == "Default Island" then
             local cframe = CFrame.new(131.374573, 361.482452, -6.89128542, -0.945504069, -0.000790083141, -0.325609207, -8.7355096e-07, 0.999997079, -0.00242393324, 0.325610131, -0.00229155412, -0.945501328)
             character:SetPrimaryPartCFrame(cframe)
-         elseif Value == "Tournament"
+         elseif Value == "Tournament" then
             local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
             character:SetPrimaryPartCFrame(cframe)
         end
