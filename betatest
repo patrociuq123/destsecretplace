@@ -660,5 +660,6 @@ local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00
 character:SetPrimaryPartCFrame(cframe)
 wait(1)
 game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
+wait(1)
 end    
 })
