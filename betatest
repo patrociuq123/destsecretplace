@@ -687,7 +687,14 @@ part.Anchored = true -- A plataforma está ancorada
 part.Transparency = transparency -- Definir transparência
 part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
 wait(0.5)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local newCFrame = CFrame.new(-723.266052, 310.018982, -0.0775156692, -0.473462105, -9.27528063e-08, -0.880814195, -2.28346426e-08, 1, -9.30292359e-08, 0.880814195, -2.39327402e-08, -0.473462105)
+
+humanoid.RootPart.CFrame = newCFrame
+wait(0.5)
 game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-  
   end    
 })
