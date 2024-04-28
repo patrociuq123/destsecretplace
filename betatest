@@ -686,7 +686,7 @@ part.Position = position.p -- Posição da plataforma
 part.Anchored = true -- A plataforma está ancorada
 part.Transparency = transparency -- Definir transparência
 part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
-wait(0.5)
+wait(1)
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
