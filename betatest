@@ -648,3 +648,15 @@ fireclickdetector(workspace.Arena.island5["Orange"].ClickDetector)
 end   
 })
 
+
+TabTrolling:AddButton({
+	Name = "Teleport Player to Tournament",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
+
+character:SetPrimaryPartCFrame(cframe)
+end    
+})
