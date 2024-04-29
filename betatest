@@ -740,7 +740,7 @@ end
 -- Conectar a funÃ§Ã£o de atualizaÃ§Ã£o ao evento Heartbeat
 game:GetService("RunService").Heartbeat:Connect(function()
     mostrarPosicaoJogadores()
-  end
+  end)
 end    
 })
 
