@@ -678,7 +678,7 @@ TabTrolling:AddButton({
 	Name = "Kick Random Player (Sweapper Only)",
 	Callback = function()
 local position = CFrame.new(-732.574097, 306.27005, -1.09629261, -0.0223243386, 0.0153695755, -0.999632657, -2.04585031e-05, 0.999881864, 0.0153738642, 0.999750793, 0.000363676081, -0.0223213844)
-local transparency = 0.2
+local transparency = 1
 
 local part = Instance.new("Part")
 part.Size = Vector3.new(100, 1.5, 100) -- Tamanho da plataforma
@@ -687,14 +687,11 @@ part.Anchored = true -- A plataforma está ancorada
 part.Transparency = transparency -- Definir transparência
 part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
 wait(1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
 local newCFrame = CFrame.new(-723.266052, 310.018982, -0.0775156692, -0.473462105, -9.27528063e-08, -0.880814195, -2.28346426e-08, 1, -9.30292359e-08, 0.880814195, -2.39327402e-08, -0.473462105)
 
 humanoid.RootPart.CFrame = newCFrame
 wait(0.5)
 game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
+
   end    
 })
