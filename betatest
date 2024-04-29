@@ -675,7 +675,7 @@ end
 
 
 TabTrolling:AddButton({
-	Name = "Kick Random Player (Sweapper Only)",
+	Name = "Kick Random Player Fast",
 	Callback = function()
 local position = CFrame.new(-732.574097, 306.27005, -1.09629261, -0.0223243386, 0.0153695755, -0.999632657, -2.04585031e-05, 0.999881864, 0.0153738642, 0.999750793, 0.000363676081, -0.0223213844)
 local transparency = 0.2
