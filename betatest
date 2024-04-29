@@ -631,16 +631,16 @@ local newCFrame = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -
 humanoid.RootPart.CFrame = newCFrame
 wait(0.5)
 game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-end    
+wait(1)
+OrionLib:MakeNotification({
+	Name = "Done",
+	Content = "Player got teleported to void , you need to wait until he leaves or you will get trapped. (Use Esp To know the user ) He should be 50000+ meters from Arena",
+	Image = "rbxassetid://4483345998",
+	Time = 5
 })
 
-TabBadges:AddButton({
-	Name = "Get Brazil Badge",
-	Callback = function()
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Brazil.portal.TouchInterest.Parent, 0)
 end    
 })
-
 
 TabBadges:AddButton({
 	Name = "Get Orange Badge",
