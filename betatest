@@ -751,3 +751,20 @@ end
 })
 
 
+TabTeleports:AddButton({
+	Name = "No Oneshot Gamemode",
+	Callback = function()
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport3.TouchInterest.Parent, 0)
+end    
+})
+
+
+
+TabTeleports:AddButton({
+	Name = "Join Arena (Lobby Only)",
+	Callback = function()
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
+end    
+})
+
+
