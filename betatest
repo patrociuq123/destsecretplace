@@ -675,12 +675,12 @@ end
 
 
 TabTrolling:AddButton({
-	Name = "Bring Player to Lobby",
+	Name = "Bring Player to Hunter Arena",
 	Callback = function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
-local cframe = CFrame.new(-795.934753, 329.274933, -1.03634119, 0.148197666, 0.00229916582, -0.988955081, -2.76089145e-06, 0.999997318, 0.00232442468, 0.988957763, -0.00034175007, 0.148197278)
+local cframe = CFrame.new(17896.1797, -128.664368, -3544.22412, -0.999756634, -0.000100836049, -0.0220624395, -3.8296148e-06, 0.999990463, -0.00439669611, 0.0220626704, -0.00439554127, -0.999746978)
 
 character:SetPrimaryPartCFrame(cframe)
 wait(1)
@@ -688,6 +688,5 @@ game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
 
   end    
 })
-
 
 
