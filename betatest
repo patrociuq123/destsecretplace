@@ -681,12 +681,12 @@ local position = CFrame.new(-732.574097, 306.27005, -1.09629261, -0.0223243386, 
 local transparency = 0.2
 
 local part = Instance.new("Part")
-part.Size = Vector3.new(100, 2, 100) -- Tamanho da plataforma
+part.Size = Vector3.new(100, 3, 100) -- Tamanho da plataforma
 part.Position = position.p -- Posição da plataforma
 part.Anchored = true -- A plataforma está ancorada
 part.Transparency = transparency -- Definir transparência
 part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
-wait(0.5)
+wait(1)
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
