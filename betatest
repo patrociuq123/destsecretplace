@@ -691,12 +691,10 @@ game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
 })
 
 
-TabMisc:AddToggle({
-	Name = "Esp (ugly)",
-	Default = false,
-	Callback = function(Value)
-Esp = Value
-while Esp = Value do
+
+TabMisc:AddButton({
+	Name = "Esp (Ugly)",
+	Callback = function()
 local function calcularDistancia(ponto1, ponto2)
     return (ponto1 - ponto2).magnitude
 end
@@ -743,5 +741,8 @@ game:GetService("RunService").Heartbeat:Connect(function()
   end)
 end    
 })
+
+
+
 
 
