@@ -612,7 +612,7 @@ TabTeleports:AddDropdown({
 TabTrolling:AddButton({
 	Name = "Tp Player to Void",
 	Callback = function()
-local position = CFrame.new(3285.71338, -34652.5078, 3441.38037, 0.290136218, 0.100799792, 0.951661944, -0.00668189675, 0.994626522, -0.103313453, -0.956962049, 0.0236160457, 0.289250672)
+local position = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -0.266344607, -0.74628818, -0.0209113024, 0.936077535, -0.351171732, 0.792116284, 0.229824781, 0.565448761)
 local transparency = 1
 
 local part = Instance.new("Part")
@@ -626,7 +626,7 @@ local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
-local newCFrame = CFrame.new(3285.71338, -34652.5078, 3441.38037, 0.290136218, 0.100799792, 0.951661944, -0.00668189675, 0.994626522, -0.103313453, -0.956962049, 0.0236160457, 0.289250672)
+local newCFrame = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -0.266344607, -0.74628818, -0.0209113024, 0.936077535, -0.351171732, 0.792116284, 0.229824781, 0.565448761)
 
 humanoid.RootPart.CFrame = newCFrame
 wait(0.5)
