@@ -772,3 +772,43 @@ TabCredits:AddParagraph("Made By PatroqOfc","Credits to GiangMc and Bacon Script
 
 
 TabLogs:AddParagraph("Destroyer Hub v7.1 ","Added more tabs; A lot more stuff; Fixed some bugs ; Gui fully reworked ")
+
+
+TabTrolling:AddButton({
+	Name = "Freeze Random (Need Frostbite)",
+	Callback = function()
+local function GetRandomPlayer()
+    local players = game.Players:GetPlayers()
+    local randomIndex = math.random(1, #players)
+    return players[randomIndex]
+end
+
+-- Função para teleportar um jogador para outro jogador aleatório
+local function TeleportToRandomPlayer(player)
+    local randomPlayer = GetRandomPlayer()
+    if randomPlayer then
+        player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
+    else
+        print("Nenhum jogador disponível para teleportar.")
+    end
+end
+
+-- Teleportar o jogador para uma pessoa aleatória quando o script é executado
+local player = game.Players.LocalPlayer
+if player then
+    TeleportToRandomPlayer(player)
+else
+    print("Não foi possível encontrar o jogador local.")
+end
+wait(0.5)
+local args = {
+    [1] = 0.013125000614672899
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("GeneralAbility"):FireServer(unpack(args))
+
+wait(1)
+            local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
+            character:SetPrimaryPartCFrame(cframe)
+end    
+})
