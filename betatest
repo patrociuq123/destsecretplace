@@ -948,3 +948,6 @@ end
 })
 
 
+Tab:AddParagraph("Made By Aquopi","Credits to GiangMc and Bacon Scripter for helping with scripts and UI.")
+
+Tab:AddParagraph("Update 9.3","Added Destroy Server ")
