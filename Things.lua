@@ -10,7 +10,7 @@ local TabBeta = Window:MakeTab({
 })
 
 
-TabMisc:AddTextbox({
+TabBeta:AddTextbox({
 	Name = "WalkSpeed",
 	Default = "Number",
 	TextDisappear = false,
@@ -19,7 +19,7 @@ SpeedSet = Value
 	end	  
 })
 
-TabMisc:AddButton({
+TabBeta:AddButton({
 	Name = "Set Speed",
 	Callback = function()
 local player = game.Players.LocalPlayer
