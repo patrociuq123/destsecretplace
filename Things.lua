@@ -10,9 +10,27 @@ local TabBeta = Window:MakeTab({
 })
 
 
-PlayerCount = TabBeta:AddLabel("Players:[" .. #game.Players:GetPlayers() .. "]")
+TabMisc:AddTextbox({
+	Name = "WalkSpeed",
+	Default = "Number",
+	TextDisappear = false,
+	Callback = function(Value)
+SpeedSet = Value
+	end	  
+})
 
+TabMisc:AddButton({
+	Name = "Set Speed",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local novaVelocidade = SpeedSet
 
-while true do
-
-
+if player then
+    local character = player.Character or player.CharacterAdded:Wait()
+    if character then
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.WalkSpeed = novaVelocidade
+    end
+end
+  	end    
+})
