@@ -1094,7 +1094,6 @@ wait(1)
 end
 
 
-TabCredits:AddParagraph("Made By Aquopi","Credits to GiangMc and Bacon Scripter for helping with scripts and UI.")
 
-TabLogs:AddParagraph("Update 9.5","Added Push Players Lobby")
 
+TabCredits:AddParagraph("Made by Aquoupi","Credits to GiangMc and Bacon Scripter fot helping.")
