@@ -10,25 +10,6 @@ local TabBeta = Window:MakeTab({
 })
 
 
+TabBeta:AddLabel("Players: 0")
 
-TabBeta:AddTextbox({
-	Name = "Kill Player Rob",
-	Default = "UserHere",
-	TextDisappear = true,
-	Callback = function(Value)
-KillPlr = Value
-end	  
-})
-
-
-TabBeta:AddButton({
-	Name = "Kill Player",
-	Callback = function()
-game:GetService("ReplicatedStorage").rob:FireServer()
-    wait(4)
-
-        local Player = game.Players:FindFirstChild(KillPlr)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-end    
-})
+CoolLabel:Set("PlayerNumber")
