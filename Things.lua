@@ -10,6 +10,9 @@ local TabBeta = Window:MakeTab({
 })
 
 
+TabBeta:AddLabel("Players: 0")
+
+
 
 local Players = game:GetService("Players")
 local PlayersLabel = script.Parent -- Assumindo que o objeto que mostra a quantidade de jogadores tem o script como pai
@@ -28,6 +31,4 @@ Players.PlayerRemoving:Connect(UpdatePlayerCount)
 
 
 
-
-TabBeta:AddLabel("Players: 0")
 
