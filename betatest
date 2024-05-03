@@ -1085,6 +1085,15 @@ game:GetService("ReplicatedStorage").rob:FireServer()
 end    
 })
 
+
+PlayerCount = TabBadges:AddLabel("Players:[" .. #game.Players:GetPlayers() .. "]")
+
+while true do
+PlayerCount:Set("Players:[" .. #game.Players:GetPlayers() .. "]")
+wait(1)
+end
+
+
 TabCredits:AddParagraph("Made By Aquopi","Credits to GiangMc and Bacon Scripter for helping with scripts and UI.")
 
 TabLogs:AddParagraph("Update 9.5","Added Push Players Lobby")
