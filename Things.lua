@@ -16,5 +16,7 @@ PlayerCount = TabBeta:AddLabel("Players:[" .. #game.Players:GetPlayers() .. "]")
 
 if game.Players.PlayerAdded:Connect(function()
 PlayerCount:Set("Players:[" .. #game.Players:GetPlayers() .. "]")
+end
 elseif game.Player.PlayerRemoving:Connect(function()
 PlayerCount:Set("Players:[" .. #game.Players:GetPlayers() .. "]")
+end
