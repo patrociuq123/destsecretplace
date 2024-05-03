@@ -1,6 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "Destroyer Hub 💥| Slap Battles V.9.4", HidePremium = false, IntroEnabled = true, IntroText = "Destroyer Hub💥", SaveConfig = true, ConfigFolder = "DestroyerHub"})
+local Window = OrionLib:MakeWindow({Name = "Destroyer Hub 💥| Slap Battles V.9.5", HidePremium = false, IntroEnabled = true, IntroText = "Destroyer Hub💥", SaveConfig = true, ConfigFolder = "DestroyerHub"})
 
 --Anti Ban (Credits to GiangMc)--
 
@@ -1040,8 +1040,30 @@ end
 })
 
 
+TabMisc:AddToggle({
+	Name = "Push Lobby Players (Tip: Use Invisibility)",
+	Default = false,
+	Callback = function(Value)
+PushPlayer = Value
+while PushPlayer do
+fireclickdetector(workspace.Lobby["Pusher"].ClickDetector)
+wait(0.1)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local cframe = CFrame.new(-821.022644, 329.341156, -2.04819012, -0.0186797082, -0.00294048851, -0.999821246, -1.33748063e-06, 0.999995708, -0.00294097653, 0.999825537, -5.3597214e-05, -0.0186796319)
+
+character:SetPrimaryPartCFrame(cframe) 
+wait(0.1)
+game:GetService("ReplicatedStorage").PusherWall:FireServer() 
+wait(7)
+  end
+end    
+})
+
+
 
 TabCredits:AddParagraph("Made By Aquopi","Credits to GiangMc and Bacon Scripter for helping with scripts and UI.")
 
-TabLogs:AddParagraph("Update 9.4","Changed Destroy Server")
+TabLogs:AddParagraph("Update 9.5","Added Push Players Lobby")
 
