@@ -10,9 +10,12 @@ local TabBeta = Window:MakeTab({
 })
 
 
-PlayerCount = TabBeta:AddLabel("Players:["while true do
- .. #game.Players:GetPlayers() ..
-wait(1) "]")
+PlayerCount = TabBeta:AddLabel("Players:[" .. #game.Players:GetPlayers() .. "]")
 
 
 
+if game.Players.PlayerAdded:Connect(function()
+PlayerCount:Set("Players:[" .. #game.Players:GetPlayers() .. "]")
+or 
+if game.Player.PlayerRemoving:Connect(function()
+PlayerCount:Set("Players:[" .. #game.Players:GetPlayers() .. "]")
