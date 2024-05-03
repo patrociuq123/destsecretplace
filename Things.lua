@@ -14,21 +14,19 @@ TabBeta:AddLabel("Players: 0")
 
 
 
-local Players = game:GetService("Players")
-local PlayersLabel = script.Parent -- Assumindo que o objeto que mostra a quantidade de jogadores tem o script como pai
+-- Definindo a label inicialmente com 0 jogadores
+local Label = script.Parent:WaitForChild("PlayersLabel")
+Label.Text = "Players in Game: 0"
 
--- Função para atualizar a quantidade de jogadores
+-- Função para atualizar a label com a contagem de jogadores
 local function UpdatePlayerCount()
-    local playerCount = #Players:GetPlayers()
-    PlayersLabel.Text = "Quantidade de jogadores: " .. playerCount
+    local players = game:GetService("Players"):GetPlayers()
+    Label.Text = "Players in Game: " .. #players
 end
 
--- Atualize a quantidade de jogadores inicialmente e defina um evento para atualizá-la periodicamente
+-- Chamando a função inicialmente e configurando-a para ser chamada sempre que a quantidade de jogadores mudar
 UpdatePlayerCount()
-Players.PlayerAdded:Connect(UpdatePlayerCount)
-Players.PlayerRemoving:Connect(UpdatePlayerCount)
-
-
-
+game:GetService("Players").PlayerAdded:Connect(UpdatePlayerCount)
+game:GetService("Players").PlayerRemoving:Connect(UpdatePlayerCount)
 
 
