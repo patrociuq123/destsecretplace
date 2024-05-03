@@ -1,6 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "Destroyer Hub 💥| Slap Battles V.9.5", HidePremium = false, IntroEnabled = true, IntroText = "Destroyer Hub💥", SaveConfig = true, ConfigFolder = "DestroyerHub"})
+local Window = OrionLib:MakeWindow({Name = "Destroyer Hub🔥| Slap Battles V.10.6", HidePremium = false, IntroEnabled = true, IntroText = "Destroyer Hub🔥", SaveConfig = true, ConfigFolder = "DestroyerHub"})
 
 --Anti Ban (Credits to GiangMc)--
 
@@ -15,6 +15,7 @@ Namecall = hookmetamethod(game, "__namecall", function(self, ...)
    end
    return Namecall(self, ...)
 end)
+
 
 
 
@@ -63,6 +64,7 @@ local TabLogs = Window:MakeTab({
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
+
 
 
 -- Buttons and Toggles
@@ -370,8 +372,8 @@ end
 })
 
 TabTrolling:AddButton({
-	Name = "Kick Random Player",
-	Callback = function()
+        Name = "Kick Random Player",
+        Callback = function()
 local position = CFrame.new(-732.574097, 306.27005, -1.09629261, -0.0223243386, 0.0153695755, -0.999632657, -2.04585031e-05, 0.999881864, 0.0153738642, 0.999750793, 0.000363676081, -0.0223213844)
 local transparency = 0.2
 
@@ -427,10 +429,10 @@ end
 
 
 TabBadges:AddDropdown({
-	Name = "Elude Keypad",
-	Default = "1",
-	Options = {"1 Player", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players", "7 Players", "8 Players", "9 Players", "10 Players", "11 Players", "12 Players", "13 Players", "14 Players"},
-	Callback = function(Value)
+        Name = "Elude Keypad",
+        Default = "1",
+        Options = {"1 Player", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players", "7 Players", "8 Players", "9 Players", "10 Players", "11 Players", "12 Players", "13 Players", "14 Players"},
+        Callback = function(Value)
 if Value == "1 Player" then
 fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
 wait(0.5)
@@ -608,7 +610,6 @@ TabTeleports:AddDropdown({
 })
 
 
-
 TabTrolling:AddButton({
 	Name = "Tp Player to Void",
 	Callback = function()
@@ -643,12 +644,19 @@ end
 })
 
 TabBadges:AddButton({
+	Name = "Get Brazil Badge",
+	Callback = function()
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Brazil.portal.TouchInterest.Parent, 0)
+end    
+})
+
+
+TabBadges:AddButton({
 	Name = "Get Orange Badge",
 	Callback = function()
 fireclickdetector(workspace.Arena.island5["Orange"].ClickDetector)
 end   
 })
-
 
 
 TabTrolling:AddButton({
@@ -674,7 +682,6 @@ game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
 end    
 })
 
-
 TabTrolling:AddButton({
 	Name = "Bring Player to Hunter Arena",
 	Callback = function()
@@ -689,8 +696,6 @@ game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
 
   end    
 })
-
-
 
 TabMain:AddButton({
 	Name = "Esp (Ugly)",
@@ -759,14 +764,12 @@ end
 })
 
 
-
 TabTeleports:AddButton({
 	Name = "Join Arena (Lobby Only)",
 	Callback = function()
 firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
 end    
 })
-
 
 
 TabTrolling:AddButton({
@@ -795,7 +798,7 @@ if player then
 else
     print("Não foi possível encontrar o jogador local.")
 end
-wait(0.5)
+wait(0.2)
 local args = {
     [1] = 0.013125000614672899
 }
@@ -1040,6 +1043,7 @@ end
 })
 
 
+
 TabMisc:AddToggle({
 	Name = "Push Lobby Players (Tip: Use Invisibility)",
 	Default = false,
@@ -1062,6 +1066,7 @@ end
 })
 
 
+
 TabMisc:AddTextbox({
 	Name = "Kill Player Rob",
 	Default = "UserHere",
@@ -1076,7 +1081,7 @@ TabMisc:AddButton({
 	Name = "Kill Player",
 	Callback = function()
 game:GetService("ReplicatedStorage").rob:FireServer()
-    wait(4)
+    wait(4.5)
 
         local Player = game.Players:FindFirstChild(KillPlr)
         if Player then
@@ -1086,14 +1091,174 @@ end
 })
 
 
-PlayerCount = TabBadges:AddLabel("Players:[" .. #game.Players:GetPlayers() .. "]")
+TabMisc:AddTextbox({
+	Name = "WalkSpeed",
+	Default = "Number",
+	TextDisappear = false,
+	Callback = function(Value)
+SpeedSet = Value
+	end	  
+})
 
-while true do
-PlayerCount:Set("Players:[" .. #game.Players:GetPlayers() .. "]")
-wait(1)
+TabMisc:AddButton({
+	Name = "Set Speed",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local novaVelocidade = SpeedSet
+
+if player then
+    local character = player.Character or player.CharacterAdded:Wait()
+    if character then
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.WalkSpeed = novaVelocidade
+    end
+end
+  	end    
+})
+
+TabMisc:AddTextbox({
+	Name = "Jumppower",
+	Default = "Number",
+	TextDisappear = false,
+	Callback = function(Value)
+JumpSet = Value
+	end	  
+})
+
+
+TabMisc:AddButton({
+	Name = "Set Jumppower",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local newJumpPower = JumpSet
+
+if player then
+    local character = player.Character or player.CharacterAdded:Wait()
+    if character then
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.JumpPower = newJumpPower
+    end
+end
+end    
+})
+
+
+
+TabTrolling:AddTextbox({
+    Name = "Jet Player",
+    Default = "User",
+    TextDisappear = false,
+    Callback = function(Value)
+        JetTarget = Value
+    end
+})
+
+TabTrolling:AddButton({
+    Name = "Start Jet",
+    Callback = function()
+        local Player = game.Players:FindFirstChild(JetTarget)
+        if Player then
+            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
+
+wait(0.2)
+
+        local args = {
+            [1] = game.Players[JetTarget].Character
+        }
+
+        game:GetService("ReplicatedStorage").AirStrike:FireServer(unpack(args))
+wait(0.2)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
+            character:SetPrimaryPartCFrame(cframe)
+  end
+end
+})
+
+
+TabTrolling:AddTextbox({
+    Name = "Track Player",
+    Default = "User",
+    TextDisappear = false,
+    Callback = function(Value)
+        TrackPlr = Value
+    end
+})
+
+TabTrolling:AddButton({
+    Name = "Start Track",
+    Callback = function()
+      local args = {
+            [1] = game.Players[TrackPlr].Character
+        }
+
+        game:GetService("ReplicatedStorage").GeneralAbility:FireServer(unpack(args))
+
+    end
+})
+
+TabTrolling:AddTextbox({
+    Name = "Sbeve Player",
+    Default = "User",
+    TextDisappear = false,
+    Callback = function(Value)
+        SbavePlr = Value
+    end
+})
+
+TabTrolling:AddButton({
+    Name = "Start Sbave",
+    Callback = function()
+game:GetService("ReplicatedStorage").KrakenArm:FireServer()
+wait(0.2)
+        local Player = game.Players:FindFirstChild(SbavePlr)
+        if Player then
+            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
+  end
+end
+})
+
+
+TabTrolling:AddButton({
+	Name = "Sbeve All",
+	Callback = function()
+game:GetService("ReplicatedStorage").KrakenArm:FireServer()
+
+wait(0.5)
+local players = game:GetService("Players")
+local teleportInterval = 0.2
+
+local function teleportToPlayer(player)
+    game.Players.LocalPlayer.Character:MoveTo(player.Character.HumanoidRootPart.Position)
 end
 
+local function teleportToAllPlayers()
+    for _, player in ipairs(players:GetPlayers()) do
+        if player ~= game.Players.LocalPlayer then
+            teleportToPlayer(player)
+            wait(teleportInterval)
+        end
+    end
+end
+
+teleportToAllPlayers()
+wait(1)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
+            character:SetPrimaryPartCFrame(cframe)
+end    
+})
 
 
 
-TabCredits:AddParagraph("Made by Aquoupi","Credits to GiangMc and Bacon Scripter fot helping.")
+TabCredits:AddParagraph("Made By PatroqOfc","Credits to Bacon Scripter and GiangMc for helping.")
+
+TabLogs:AddParagraph("Update 10.6","Added Sbave Player and Sbave all ")
+
+
+
+
