@@ -1306,12 +1306,6 @@ local TabMisc = Window:MakeTab({
 
 
 
-local TabBadges = Window:MakeTab({
-        Name = "Badges",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
 local TabTeleports = Window:MakeTab({
         Name = "Teleports",
         Icon = "rbxassetid://4483345998",
@@ -1342,7 +1336,7 @@ local TabLogs = Window:MakeTab({
 -- Buttons and Toggles
 
 TabMain:AddToggle({
-        Name = "Slap Farm (Need Dual)",
+        Name = "Slap Farm ",
         Default = false,
         Callback = function(Value)
 SlapFarm = Value
@@ -1400,41 +1394,6 @@ task.wait(1.5)
 end  
 })
 
-
-TabMain:AddButton({
-        Name = "Invisible",
-        Callback = function()
-fireclickdetector(workspace.Lobby["Ghost"].ClickDetector)
-wait(2)
-game:GetService("ReplicatedStorage"):WaitForChild("Ghostinvisibilityactivated"):FireServer()
-end                
-})
-
-
-TabBadges:AddToggle({
-        Name = "Bob Farm (Fixed)",
-        Default = false,
-        Callback = function(Value)
-  BobFarm = Value
-  while BobFarm do
-    local jogador = game.Players.LocalPlayer
-local destinoCFrame = CFrame.new(-810.162292, 329.90097, 3.98657513, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-jogador.Character:SetPrimaryPartCFrame(destinoCFrame)
-wait(2)
-local args = {
-    [1] = true
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Duplicate"):FireServer(unpack(args))
-wait(1.5) 
-local player = game.Players.LocalPlayer
-player.Character:WaitForChild("Humanoid").Health = 0
-  wait(6)
-  end
-end
-})
-
-
 TabMisc:AddButton({
         Name = "Anti-Void",
         Callback = function()
@@ -1454,71 +1413,6 @@ local platformSize = Vector3.new(1000, 5, 1000)
     end
     local platform = createPlatform()
 end  
-})
-
-TabTrolling:AddButton({
-        Name = "Kill Random Player (Needs Rob)",
-        Callback = function()
-    game:GetService("ReplicatedStorage").rob:FireServer()
-    wait(4)
-    -- Função para obter um jogador aleatório no servidor
-    local function GetRandomPlayer()
-        local players = game.Players:GetPlayers()
-        local randomIndex = math.random(1, #players)
-        return players[randomIndex]
-    end
-
-    -- Teleport Player to a Random Player
-    local function TeleportToRandomPlayer(player)
-        local randomPlayer = GetRandomPlayer()
-        if randomPlayer then
-            player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-        else
-            print("Nenhum jogador disponível para teleportar.")
-        end
-    end
-
-    -- Teleportar o jogador para uma pessoa aleatória quando o script é executado
-    local player = game.Players.LocalPlayer
-    if player then
-        TeleportToRandomPlayer(player)
-    else
-        print("Não foi possível encontrar o jogador local.")
-    end
-end
-})
-
-TabMain:AddToggle({
-        Name = "Auto Spawn Replica",
-        Default = false,
-        Callback = function(Value)
-spawnReplica = Value
-while spawnReplica do
-    local args = {
-            [1] = true
-        }
-
-        game:GetService("ReplicatedStorage"):WaitForChild("Duplicate"):FireServer(unpack(args))
-
-        wait(6)  -- espera 6 segundos antes de continuar para a próxima execução
-    end 
-        end    
-})
-
-TabMain:AddToggle({
-    Name = "Auto Slap Replica (Need Auto Spawn Replica)",
-    Default = false,
-    Callback = function(Value)
-        slapReplica = Value
-        while slapReplica do 
-            local playerName = "\195\133" .. game.Players.LocalPlayer.Name
-            local args = {
-                [1] = workspace:WaitForChild(playerName):WaitForChild("Left Leg")
-            }
-            game:GetService("ReplicatedStorage"):WaitForChild("b"):FireServer(unpack(args))
-            task.wait(0.2)
-        end  
-    end
 })
 
 
@@ -1557,28 +1451,6 @@ TabMisc:AddButton({
 end    
 })
 
-TabTrolling:AddButton({
-        Name = "Jester All (Beta)",
-        Callback = function()
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-for i = 1, 40 do
-    local allPlayers = Players:GetPlayers()
-    local randomPlayer = allPlayers[math.random(1, #allPlayers)]
-
-    local args = {
-        [1] = "Ability3",
-        [2] = randomPlayer
-    }
-
-    ReplicatedStorage:WaitForChild("GeneralAbility"):FireServer(unpack(args))
-
-    -- Esperar 1.7 segundos antes da próxima iteração
-    wait(2)
-  end
-end    
-})
 
 TabMisc:AddToggle({
         Name = "Null Spam",
@@ -1593,7 +1465,7 @@ task.wait(10)
 })
 
 TabMisc:AddButton({
-        Name = "GodMode (Need Golden)",
+        Name = "GodMode Broke in killstreak",
         Callback = function()
 fireclickdetector(workspace.Lobby["Golden"].ClickDetector)
 wait(1)
@@ -1615,19 +1487,6 @@ TabTeleports:AddButton({
         Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Arena.Plate.CFrame
           end    
-})
-
-
-TabBadges:AddToggle({
-        Name = "Brick Farm",
-        Default = false,
-        Callback = function(Value)
-BrickFarm = Value 
-while BrickFarm do
-game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,x)
-task.wait(1)
-  end
-end
 })
 
 
