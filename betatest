@@ -1502,64 +1502,9 @@ task.wait(2)
 end 
 })
 
-TabTrolling:AddButton({
-        Name = "Kick Random Player",
-        Callback = function()
-local position = CFrame.new(-732.574097, 306.27005, -1.09629261, -0.0223243386, 0.0153695755, -0.999632657, -2.04585031e-05, 0.999881864, 0.0153738642, 0.999750793, 0.000363676081, -0.0223213844)
-local transparency = 0.2
-
-local part = Instance.new("Part")
-part.Size = Vector3.new(100, 1.5, 100) -- Tamanho da plataforma
-part.Position = position.p -- Posição da plataforma
-part.Anchored = true -- A plataforma está ancorada
-part.Transparency = transparency -- Definir transparência
-part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
-wait(2)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
-local newCFrame = CFrame.new(-723.266052, 310.018982, -0.0775156692, -0.473462105, -9.27528063e-08, -0.880814195, -2.28346426e-08, 1, -9.30292359e-08, 0.880814195, -2.39327402e-08, -0.473462105)
-
-humanoid.RootPart.CFrame = newCFrame
-wait(0.5)
-local args = {
-    [1] = game:GetService("Players").LocalPlayer.Character.Recall,
-    [2] = Vector3.new(55.76399230957031, -5.172937870025635, 45.26799011230469)
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Recall"):InvokeServer(unpack(args))
-
-wait(2.4)
--- Função para obter um jogador aleatório no servidor
-local function GetRandomPlayer()
-    local players = game.Players:GetPlayers()
-    local randomIndex = math.random(1, #players)
-    return players[randomIndex]
-end
-
--- Função para teleportar um jogador para outro jogador aleatório
-local function TeleportToRandomPlayer(player)
-    local randomPlayer = GetRandomPlayer()
-    if randomPlayer then
-        player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-    else
-        print("Nenhum jogador disponível para teleportar.")
-    end
-end
-
--- Teleportar o jogador para uma pessoa aleatória quando o script é executado
-local player = game.Players.LocalPlayer
-if player then
-    TeleportToRandomPlayer(player)
-else
-    print("Não foi possível encontrar o jogador local.")
-  end
-end    
-})
 
 
-TabBadges:AddDropdown({
+TabMisc:AddDropdown({
         Name = "Elude Keypad",
         Default = "1",
         Options = {"1 Player", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players", "7 Players", "8 Players", "9 Players", "10 Players", "11 Players", "12 Players", "13 Players", "14 Players"},
@@ -1741,40 +1686,9 @@ TabTeleports:AddDropdown({
 })
 
 
-TabTrolling:AddButton({
-	Name = "Tp Player to Void",
-	Callback = function()
-local position = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -0.266344607, -0.74628818, -0.0209113024, 0.936077535, -0.351171732, 0.792116284, 0.229824781, 0.565448761)
-local transparency = 1
 
-local part = Instance.new("Part")
-part.Size = Vector3.new(100, 1.5, 100) -- Tamanho da plataforma
-part.Position = position.p -- Posição da plataforma
-part.Anchored = true -- A plataforma está ancorada
-part.Transparency = transparency -- Definir transparência
-part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
-wait(0.3)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
 
-local newCFrame = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -0.266344607, -0.74628818, -0.0209113024, 0.936077535, -0.351171732, 0.792116284, 0.229824781, 0.565448761)
-
-humanoid.RootPart.CFrame = newCFrame
-wait(0.5)
-game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-wait(1)
-OrionLib:MakeNotification({
-	Name = "Done",
-	Content = "Player got teleported to void , you need to wait until he leaves or you will get trapped. (Use Esp To know the user ) He should be 50000+ meters from Arena",
-	Image = "rbxassetid://4483345998",
-	Time = 5
-})
-
-end    
-})
-
-TabBadges:AddButton({
+TabMisc:AddButton({
 	Name = "Get Brazil Badge",
 	Callback = function()
 firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Brazil.portal.TouchInterest.Parent, 0)
@@ -1782,7 +1696,7 @@ end
 })
 
 
-TabBadges:AddButton({
+TabMisc:AddButton({
 	Name = "Get Orange Badge",
 	Callback = function()
 fireclickdetector(workspace.Arena.island5["Orange"].ClickDetector)
@@ -1790,43 +1704,7 @@ end
 })
 
 
-TabTrolling:AddButton({
-        Name = "Teleport Player to Tournament",
-        Callback = function()
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
 
-local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
-
-character:SetPrimaryPartCFrame(cframe)
-wait(0.5)
-game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-wait(1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
-
-character:SetPrimaryPartCFrame(cframe)
-wait(0.5)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer() 
-end    
-})
-
-TabTrolling:AddButton({
-	Name = "Bring Player to Hunter Arena",
-	Callback = function()
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(17896.1797, -128.664368, -3544.22412, -0.999756634, -0.000100836049, -0.0220624395, -3.8296148e-06, 0.999990463, -0.00439669611, 0.0220626704, -0.00439554127, -0.999746978)
-
-character:SetPrimaryPartCFrame(cframe)
-wait(1)
-game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-
-  end    
-})
 
 TabMain:AddButton({
 	Name = "Esp (Ugly)",
@@ -1901,47 +1779,6 @@ TabTeleports:AddButton({
 firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
 end    
 })
-
-
-TabTrolling:AddButton({
-	Name = "Freeze Random (Need Frostbite)",
-	Callback = function()
-local function GetRandomPlayer()
-    local players = game.Players:GetPlayers()
-    local randomIndex = math.random(1, #players)
-    return players[randomIndex]
-end
-
--- Função para teleportar um jogador para outro jogador aleatório
-local function TeleportToRandomPlayer(player)
-    local randomPlayer = GetRandomPlayer()
-    if randomPlayer then
-        player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-    else
-        print("Nenhum jogador disponível para teleportar.")
-    end
-end
-
--- Teleportar o jogador para uma pessoa aleatória quando o script é executado
-local player = game.Players.LocalPlayer
-if player then
-    TeleportToRandomPlayer(player)
-else
-    print("Não foi possível encontrar o jogador local.")
-end
-wait(0.2)
-local args = {
-    [1] = 0.013125000614672899
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("GeneralAbility"):FireServer(unpack(args))
-
-wait(1)
-            local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-end    
-})
-
 
 TabTrolling:AddToggle({
 	Name = "Destroy Server (This can get you banned)",
@@ -2175,53 +2012,6 @@ end
 
 
 
-TabMisc:AddToggle({
-	Name = "Push Lobby Players (Tip: Use Invisibility)",
-	Default = false,
-	Callback = function(Value)
-PushPlayer = Value
-while PushPlayer do
-fireclickdetector(workspace.Lobby["Pusher"].ClickDetector)
-wait(0.1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-821.022644, 329.341156, -2.04819012, -0.0186797082, -0.00294048851, -0.999821246, -1.33748063e-06, 0.999995708, -0.00294097653, 0.999825537, -5.3597214e-05, -0.0186796319)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.1)
-game:GetService("ReplicatedStorage").PusherWall:FireServer() 
-wait(7)
-  end
-end    
-})
-
-
-
-TabMisc:AddTextbox({
-	Name = "Kill Player Rob",
-	Default = "UserHere",
-	TextDisappear = false,
-	Callback = function(Value)
-KillPlr = Value
-end	  
-})
-
-
-TabMisc:AddButton({
-	Name = "Kill Player",
-	Callback = function()
-game:GetService("ReplicatedStorage").rob:FireServer()
-    wait(4.5)
-
-        local Player = game.Players:FindFirstChild(KillPlr)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-  end
-end    
-})
-
-
 TabMisc:AddTextbox({
 	Name = "WalkSpeed",
 	Default = "Number",
@@ -2272,118 +2062,6 @@ if player then
 end
 end    
 })
-
-
-
-TabTrolling:AddTextbox({
-    Name = "Jet Player",
-    Default = "User",
-    TextDisappear = false,
-    Callback = function(Value)
-        JetTarget = Value
-    end
-})
-
-TabTrolling:AddButton({
-    Name = "Start Jet",
-    Callback = function()
-        local Player = game.Players:FindFirstChild(JetTarget)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-
-wait(0.2)
-
-        local args = {
-            [1] = game.Players[JetTarget].Character
-        }
-
-        game:GetService("ReplicatedStorage").AirStrike:FireServer(unpack(args))
-wait(0.2)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-  end
-end
-})
-
-
-TabTrolling:AddTextbox({
-    Name = "Track Player",
-    Default = "User",
-    TextDisappear = false,
-    Callback = function(Value)
-        TrackPlr = Value
-    end
-})
-
-TabTrolling:AddButton({
-    Name = "Start Track",
-    Callback = function()
-      local args = {
-            [1] = game.Players[TrackPlr].Character
-        }
-
-        game:GetService("ReplicatedStorage").GeneralAbility:FireServer(unpack(args))
-
-    end
-})
-
-TabTrolling:AddTextbox({
-    Name = "Sbeve Player",
-    Default = "User",
-    TextDisappear = false,
-    Callback = function(Value)
-        SbavePlr = Value
-    end
-})
-
-TabTrolling:AddButton({
-    Name = "Start Sbave",
-    Callback = function()
-game:GetService("ReplicatedStorage").KrakenArm:FireServer()
-wait(0.2)
-        local Player = game.Players:FindFirstChild(SbavePlr)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-  end
-end
-})
-
-
-TabTrolling:AddButton({
-	Name = "Sbeve All",
-	Callback = function()
-game:GetService("ReplicatedStorage").KrakenArm:FireServer()
-
-wait(0.5)
-local players = game:GetService("Players")
-local teleportInterval = 0.2
-
-local function teleportToPlayer(player)
-    game.Players.LocalPlayer.Character:MoveTo(player.Character.HumanoidRootPart.Position)
-end
-
-local function teleportToAllPlayers()
-    for _, player in ipairs(players:GetPlayers()) do
-        if player ~= game.Players.LocalPlayer then
-            teleportToPlayer(player)
-            wait(teleportInterval)
-        end
-    end
-end
-
-teleportToAllPlayers()
-wait(1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-end    
-})
-
 
 
 TabCredits:AddParagraph("Made By Aquoupi","Credits to Bacon Scripter and GiangMc for helping.")
