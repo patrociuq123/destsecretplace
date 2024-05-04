@@ -1269,7 +1269,7 @@ TabLogs:AddParagraph("Update 10.6","Added Sbave Player and Sbave all ")
 end
 local placeId = game.GameId
 
-if placeId == 11520107397 then
+if placeId == 189707 then
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Destroyer Hub 🔥| Killstreak Only V.1.0🔥", HidePremium = false, IntroEnabled = true, IntroText = "DestHub Ks Only ", SaveConfig = true, ConfigFolder = "DestroyerHub"})
