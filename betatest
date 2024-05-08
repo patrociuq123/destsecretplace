@@ -1,1264 +1,439 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
-
-local Window = OrionLib:MakeWindow({Name = "Destroyer Hub🔥| Slap Battles V.10.6", HidePremium = false, IntroEnabled = true, IntroText = "Destroyer Hub🔥", SaveConfig = true, ConfigFolder = "DestroyerHub"})
-
---Anti Ban (Credits to GiangMc)--
-
-local Namecall
-Namecall = hookmetamethod(game, "__namecall", function(self, ...)
-   if getnamecallmethod() == "FireServer" and tostring(self) == "Ban" then
-       return
-   elseif getnamecallmethod() == "FireServer" and tostring(self) == "WalkSpeedChanged" then
-       return
-   elseif getnamecallmethod() == "FireServer" and tostring(self) == "AdminGUI" then
-       return
-   end
-   return Namecall(self, ...)
-end)
-
-
-
-
--- Tabs
-local TabMain = Window:MakeTab({
-        Name = "Main",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-local TabMisc = Window:MakeTab({
-        Name = "Misc",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-
-
-local TabBadges = Window:MakeTab({
-        Name = "Badges",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-local TabTeleports = Window:MakeTab({
-        Name = "Teleports",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-local TabTrolling = Window:MakeTab({
-        Name = "Trolling",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-
-local TabCredits = Window:MakeTab({
-        Name = "Credits",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-local TabLogs = Window:MakeTab({
-        Name = "Update Logs",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-
-
--- Buttons and Toggles
-
-TabMain:AddToggle({
-        Name = "Slap Farm (Need Dual)",
-        Default = false,
-        Callback = function(Value)
-SlapFarm = Value
-while SlapFarm do
-
-local function GetRandomPlayer()
-    local players = game.Players:GetPlayers()
-    local randomIndex = math.random(1, #players)
-    return players[randomIndex]
+repeat
+	wait()
+until game:IsLoaded()
+local h = game:GetService("HttpService")
+local RequestFunction
+if syn and syn.request then
+	RequestFunction = syn.request
+elseif request then
+	RequestFunction = request
+elseif http and http.request then
+	RequestFunction = http.request
+elseif http_request then
+	RequestFunction = http_request
 end
 
-local function TeleportToRandomPlayer(player)
-    local randomPlayer = GetRandomPlayer()
-    if randomPlayer then
-        player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-    else
-        print("Nenhum jogador disponível para teleportar.")
-    end
-end
+if not game.CoreGui:FindFirstChild("StreamSniper") then
+	local screenGui = Instance.new("ScreenGui", game.CoreGui)
+	screenGui.Name = "StreamSniper"
+	screenGui.IgnoreGuiInset = true
 
-local player = game.Players.LocalPlayer
-if player then
-    TeleportToRandomPlayer(player)
+	local TBox1 = Instance.new("TextBox", screenGui)
+	TBox1.Size = UDim2.new(0.1, 0, 0.1, 0)
+	TBox1.Position = UDim2.new(0.8, 0, 0.3, 0)
+	TBox1.Text = ""
+	TBox1.PlaceholderColor3 = Color3.new(1, 1, 0)
+	TBox1.TextColor3 = Color3.new(1, 1, 0)
+	TBox1.BackgroundColor3 = Color3.new(0, 0, 0)
+	TBox1.BorderColor3 = Color3.new(0, 0, 0)
+
+	local TBox2 = Instance.new("TextBox", screenGui)
+	TBox2.Size = UDim2.new(0.1, 0, 0.1, 0)
+	TBox2.Position = UDim2.new(0.9, 0, 0.3, 0)
+	TBox2.Text = ""
+	TBox2.PlaceholderColor3 = Color3.new(1, 1, 0)
+	TBox2.TextColor3 = Color3.new(1, 1, 0)
+	TBox2.BackgroundColor3 = Color3.new(0, 0, 0)
+	TBox2.BorderColor3 = Color3.new(0, 0, 0)
+
+	local TBox3 = Instance.new("TextBox", screenGui)
+	TBox3.Size = UDim2.new(0.2, 0, 0.1, 0)
+	TBox3.Position = UDim2.new(0.8, 0, 0.2, 0)
+	TBox3.Text = ""
+	TBox3.PlaceholderColor3 = Color3.new(1, 1, 0)
+	TBox3.TextColor3 = Color3.new(1, 1, 0)
+	TBox3.BackgroundColor3 = Color3.new(0, 0, 0)
+	TBox3.BorderColor3 = Color3.new(0, 0, 0)
+
+	TBox1.TextScaled = true
+	TBox2.TextScaled = true
+	TBox3.TextScaled = true
+	TBox1.PlaceholderText = "PlaceId"
+	TBox2.PlaceholderText = "Player Name/ID"
+	TBox3.PlaceholderText = "Mode"
+
+	local TButton = Instance.new("TextButton", screenGui)
+	TButton.Size = UDim2.new(0.2, 0, 0.1, 0)
+	TButton.Position = UDim2.new(0.8, 0, 0.4, 0)
+	TButton.Text = "Snipe"
+	TButton.TextScaled = true
+	TButton.TextColor3 = Color3.new(1, 1, 0)
+	TButton.BackgroundColor3 = Color3.new(0, 0, 0)
+	TButton.BorderColor3 = Color3.new(0, 0, 0)
+
+	if _G.cursor == nil then
+		_G.cursor =
+			RequestFunction(
+				{["Url"] = "https://raw.githubusercontent.com/LeymansGuz/playerTokens/main/cursor.txt", ["Method"] = "GET"}
+			)
+		_G.cursor = h:JSONDecode(_G.cursor.Body)
+	end
+
+	function runScript(placeId, user, mode)
+		spawn(
+			function()
+				local timecount = tick()
+
+				if _G.available == nil then
+					_G.available = true
+				end
+
+				function round(num)
+					return tostring(math.floor(num * 100 + 0.5) / 100)
+				end
+
+				function checktokens(tokens)
+					local payload = {
+						Url = "https://thumbnails.roblox.com/v1/batch",
+						Headers = {
+							["Content-Type"] = "application/json"
+						},
+						Method = "POST",
+						Body = {}
+					}
+
+					for i, v in pairs(tokens) do
+						table.insert(
+							payload.Body,
+							{
+								requestId = "0:" .. v[3] .. ":AvatarHeadshot:150x150:png:regular",
+								type = "AvatarHeadShot",
+								targetId = 0,
+								token = v[3],
+								format = "png",
+								size = "150x150"
+							}
+						)
+					end
+					payload.Body = h:JSONEncode(payload.Body)
+					local result = RequestFunction(payload)
+					local s, data = pcall(h.JSONDecode, h, result.Body)
+					return data.data
+				end
+
+				function json()
+					found = false
+					if #_G.token >= 1 then
+						if #_G.token > 100 then
+							tab = {}
+							for i = 1, 100 do
+								table.insert(tab, _G.token[i])
+								table.insert(_G.playertoken, _G.token[i])
+								table.remove(_G.token, i)
+							end
+							leymans = checktokens(tab)
+							if leymans then
+								for i, v in pairs(leymans) do
+									if v.imageUrl == _G.image then
+										id = string.sub(v.requestId, 3, #v.requestId - 35)
+										for a, b in pairs(_G.playertoken) do
+											if b[3] == id then
+												if not found then
+													found = true
+													_G.available = true
+													if _G.mode == "TP" or _G.mode == "TPLog" then
+														if _G.mode == "TPLog" then
+														end
+														TButton.Text = "Teleporting to: " .. _G.plrname
+														game:GetService("TeleportService"):TeleportToPlaceInstance(
+														b[1],
+														b[2]
+														)
+													elseif _G.mode == "Log" then
+														return
+													end
+												end
+												return
+											end
+										end
+									end
+								end
+							end
+						elseif #_G.token <= 100 then
+							tab2 = {}
+							for i, v in pairs(_G.token) do
+								table.insert(tab2, _G.token[i])
+								table.insert(_G.playertoken, _G.token[i])
+								table.remove(_G.token, i)
+							end
+							video = checktokens(tab2)
+							if video then
+								for i, v in pairs(video) do
+									if v.imageUrl == _G.image then
+										id = string.sub(v.requestId, 3, #v.requestId - 35)
+										for a, b in pairs(_G.playertoken) do
+											if b[3] == id then
+												if not found then
+													found = true
+													_G.available = true
+													if _G.mode == "TP" or _G.mode == "TPLog" then
+														if _G.mode == "TPLog" then
+														end
+														TButton.Text = "Teleporting to: " .. _G.plrname
+														game:GetService("TeleportService"):TeleportToPlaceInstance(
+														b[1],
+														b[2]
+														)
+													elseif _G.mode == "Log" then
+														return
+													end
+												end
+											end
+										end
+									end
+								end
+							end
+							wait(1.5)
+							TButton.Text = game.Players:GetNameFromUserIdAsync(_G.plr) .. " not found"
+						end
+					end
+				end
+
+				function json2()
+					repeat
+						spawn(
+							function()
+								json()
+							end
+						)
+						local ti = tick()
+						repeat
+							game.RunService.RenderStepped:Wait()
+						until tick() - ti > 0.015
+					until #_G.token == 0
+					_G.available = true
+				end
+
+				function playertoken(gameid, target)
+					_G.token = {}
+					_G.playertoken = {}
+					_G.logged = false
+					id, b, found, ended, page, cursor, link, tokencount =
+						nil,
+					false,
+					false,
+					false,
+					nil,
+					nil,
+					nil,
+					nil
+					local suc, err =
+						pcall(
+							function()
+								if _G.cursor[tostring(gameid)] and _G.available then
+								_G.available = false
+								if tonumber(target) then
+									_G.plrname = game.Players:GetNameFromUserIdAsync(tonumber(target))
+								else
+									_G.plrname = target
+									target = game.Players:GetUserIdFromNameAsync(target)
+								end
+
+								_G.plr = target
+
+								_G.mode = mode
+								local url =
+									RequestFunction(
+										{
+											["Url"] = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" ..
+											target .. "&format=Png&size=150x150&isCircular=false",
+											["Method"] = "GET"
+										}
+									)
+								_G.image = h:JSONDecode(url.Body).data[1].imageUrl
+
+								if string.sub(_G.image, 10, 10) ~= "r" then
+									TButton.Text = "Broken pfp"
+									return
+								end
+								TButton.Text = "Searching: " .. gameid
+								a = {}
+
+								for i = 1, #_G.cursor[tostring(gameid)] + 1 do
+									if i > 1 then
+										a[i] = _G.cursor[tostring(gameid)][i - 1]
+									else
+										a[i] = ""
+									end
+								end
+
+								for i, v in ipairs(a) do
+									spawn(
+										function()
+											if waittime then
+												wait(1 / 3.2)
+												waittime = false
+											end
+											a[i] =
+												RequestFunction(
+													{
+														["Url"] = "https://games.roblox.com/v1/games/" ..
+														gameid ..
+														"/servers/0?excludeFullGames=false&limit=100&cursor=" ..
+														a[i],
+														["Method"] = "GET"
+													}
+												)
+											a[i] = h:JSONDecode(a[i].Body).data
+											if a[i] then
+												if not a[i][100] then
+													b = true
+													num = i
+												end
+											end
+										end
+									)
+									if b then
+										b = false
+										waittime = false
+										break
+									end
+									wait(1 / 3.2)
+								end
+								if num == nil then
+									num = #a
+								end
+
+								function check(c)
+									for i = 1, c do
+										if type(a[i]) == "table" then
+										else
+											return false
+										end
+									end
+									return true
+								end
+
+								repeat
+									game:GetService("RunService").RenderStepped:Wait()
+								until check(num)
+
+								for i, v in pairs(a) do
+									if i <= num then
+										for i2, v2 in pairs(v) do
+											for i3, v3 in pairs(v2.playerTokens) do
+												table.insert(_G.token, {gameid, v2.id, v3})
+											end
+										end
+									end
+								end
+
+								TButton.Text = "Sending JSON..."
+								json2()
+							elseif not _G.cursor[tostring(gameid)] and _G.available then
+								_G.available = false
+								if tonumber(target) then
+									_G.plrname = game.Players:GetNameFromUserIdAsync(tonumber(target))
+								else
+									_G.plrname = target
+									target = game.Players:GetUserIdFromNameAsync(target)
+								end
+
+								_G.plr = target
+
+								_G.mode = mode
+
+								local url =
+									RequestFunction(
+										{
+											["Url"] = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" ..
+											target .. "&format=Png&size=150x150&isCircular=false",
+											["Method"] = "GET"
+										}
+									)
+								_G.image = h:JSONDecode(url.Body).data[1].imageUrl
+								if string.sub(_G.image, 10, 10) ~= "r" then
+									TButton.Text = "Broken pfp"
+									return
+								end
+
+								TButton.Text = "Searching: " .. gameid
+								function s(g)
+									link =
+										"https://games.roblox.com/v1/games/" ..
+										g .. "/servers/0?excludeFullGames=false&limit=100"
+									if cursor then
+										link = link .. "&cursor=" .. cursor
+										page = game:HttpGet(link)
+										page = h:JSONDecode(page)
+										cursor = page.nextPageCursor
+										page = page.data
+									else
+										page = game:HttpGet(link)
+										page = h:JSONDecode(page)
+										cursor = page.nextPageCursor
+										page = page.data
+									end
+								end
+
+								local tokencount = 0
+
+								function t()
+									for i, v in pairs(page) do
+										for i2, v2 in pairs(v["playerTokens"]) do
+											tokencount = tokencount + 1
+											table.insert(_G.token, {gameid, v.id, v2})
+										end
+									end
+								end
+
+								repeat
+									s(gameid)
+									t()
+								until cursor == nil
+
+								if tokencount == 0 then
+									TButton.Text = "The game has no players"
+									_G.available = true
+									return
+								end
+
+								TButton.Text = "Sending JSON..."
+								json2()
+							elseif not _G.available then
+								TButton.Text = "Reached Http Request Limit"
+							end
+							end
+						)
+					if not suc then
+						_G.available = true
+					end
+				end
+
+				playertoken(placeId, user)
+			end
+		)
+	end
+
+	game:GetService("UserInputService").InputBegan:Connect(
+	function(a, b)
+		if not b then
+			local keycode = a.KeyCode
+			if keycode == Enum.KeyCode.RightShift then
+				game.CoreGui.StreamSniper.Enabled = not game.CoreGui.StreamSniper.Enabled
+			end
+		end
+	end
+	)
+
+	TButton.MouseButton1Click:Connect(
+		function()
+			local t1 = TBox1.Text
+			local t2 = TBox2.Text
+			local t3 = TBox3.Text
+			if string.len(t1) < 3 or string.len(t2) < 3 or not (t3 == "TP" or t3 == "Log" or t3 == "TPLog") then
+				TButton.Text = "Invalid information"
+				spawn(
+					function()
+						wait(2)
+						TButton.Text = "Snipe"
+					end
+				)
+				return
+			end
+			runScript(t1, t2, t3)
+		end
+	)
 else
-    print("No Players to teleport.")
+	game.CoreGui.StreamSniper.TextButton.Text = "Already Executed"
 end
-wait(0.5)
-local players = game:GetService("Players"):GetPlayers()
-local originPosition = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position -- If its being executed on a client
-local closestPlayer = nil
-local closestDistance = math.huge
-
-for _, player in ipairs(players) do
-    if player ~= game:GetService("Players").LocalPlayer then -- Random Child thing.
-        local playerPosition = player.Character.HumanoidRootPart.Position
-        local distance = (playerPosition - originPosition).magnitude
-        if distance < closestDistance then
-            closestPlayer = player
-            closestDistance = distance
-        end
-    end
-end
-
-if closestPlayer then
-    local args = {
-        [1] = closestPlayer.Character.Torso
-    }
-
-    game:GetService("ReplicatedStorage").GeneralHit:FireServer(unpack(args))
-else
-    print("There is no players , only the local player. ")
-end
-task.wait(1.5)
-  end
-end  
-})
-
-
-TabMain:AddButton({
-        Name = "Invisible",
-        Callback = function()
-fireclickdetector(workspace.Lobby["Ghost"].ClickDetector)
-wait(2)
-game:GetService("ReplicatedStorage"):WaitForChild("Ghostinvisibilityactivated"):FireServer()
-end                
-})
-
-
-TabBadges:AddToggle({
-        Name = "Bob Farm (Fixed)",
-        Default = false,
-        Callback = function(Value)
-  BobFarm = Value
-  while BobFarm do
-    local jogador = game.Players.LocalPlayer
-local destinoCFrame = CFrame.new(-810.162292, 329.90097, 3.98657513, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-jogador.Character:SetPrimaryPartCFrame(destinoCFrame)
-wait(2)
-local args = {
-    [1] = true
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Duplicate"):FireServer(unpack(args))
-wait(1.5) 
-local player = game.Players.LocalPlayer
-player.Character:WaitForChild("Humanoid").Health = 0
-  wait(6)
-  end
-end
-})
-
-
-TabMisc:AddButton({
-        Name = "Anti-Void",
-        Callback = function()
-
-local platformSize = Vector3.new(1000, 5, 1000) 
-    local transparency = 0.4 
-    local cframe = CFrame.new(-117.657799, -13.2288647, 31.1358738, 0.341914088, 0, -0.93973124, 0, 1, 0, 0.93973124, 0, 0.341914088)
-    local function createPlatform()
-        local platform = Instance.new("Part")
-        platform.Size = platformSize
-        platform.Anchored = true
-        platform.Transparency = transparency
-        platform.BrickColor = BrickColor.new("Medium stone grey") 
-        platform.CFrame = cframe
-        platform.Parent = game.Workspace
-        return platform
-    end
-    local platform = createPlatform()
-end  
-})
-
-TabTrolling:AddButton({
-        Name = "Kill Random Player (Needs Rob)",
-        Callback = function()
-    game:GetService("ReplicatedStorage").rob:FireServer()
-    wait(4)
-    -- Função para obter um jogador aleatório no servidor
-    local function GetRandomPlayer()
-        local players = game.Players:GetPlayers()
-        local randomIndex = math.random(1, #players)
-        return players[randomIndex]
-    end
-
-    -- Teleport Player to a Random Player
-    local function TeleportToRandomPlayer(player)
-        local randomPlayer = GetRandomPlayer()
-        if randomPlayer then
-            player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-        else
-            print("Nenhum jogador disponível para teleportar.")
-        end
-    end
-
-    -- Teleportar o jogador para uma pessoa aleatória quando o script é executado
-    local player = game.Players.LocalPlayer
-    if player then
-        TeleportToRandomPlayer(player)
-    else
-        print("Não foi possível encontrar o jogador local.")
-    end
-end
-})
-
-TabMain:AddToggle({
-        Name = "Auto Spawn Replica",
-        Default = false,
-        Callback = function(Value)
-spawnReplica = Value
-while spawnReplica do
-    local args = {
-            [1] = true
-        }
-
-        game:GetService("ReplicatedStorage"):WaitForChild("Duplicate"):FireServer(unpack(args))
-
-        wait(6)  -- espera 6 segundos antes de continuar para a próxima execução
-    end 
-        end    
-})
-
-TabMain:AddToggle({
-    Name = "Auto Slap Replica (Need Auto Spawn Replica)",
-    Default = false,
-    Callback = function(Value)
-        slapReplica = Value
-        while slapReplica do 
-            local playerName = "\195\133" .. game.Players.LocalPlayer.Name
-            local args = {
-                [1] = workspace:WaitForChild(playerName):WaitForChild("Left Leg")
-            }
-            game:GetService("ReplicatedStorage"):WaitForChild("b"):FireServer(unpack(args))
-            task.wait(0.2)
-        end  
-    end
-})
-
-
-TabMisc:AddButton({
-        Name = "Safe Spot",
-        Callback = function()
-    -- Configurações da plataforma
-    local platformSize = Vector3.new(1000, 10, 1000) -- Tamanho da plataforma (mais fina)
-    local transparency = 0.3 -- Nível de transparência da plataforma
-
-    -- CFrame fornecida
-    local cframe = CFrame.new(5482.86963, 172.234634, -269.047546, -0.599627018, -0.00381562836, 0.800270498, -1.80001043e-05, 0.999988735, 0.00475436728, -0.800279677, 0.00283642649, -0.599620283)
-
-    -- Função para criar a plataforma usando a CFrame fornecida
-    local function createPlatform()
-        local platform = Instance.new("Part")
-        platform.Size = platformSize
-        platform.Anchored = true
-        platform.Transparency = transparency
-        platform.BrickColor = BrickColor.new("Medium stone grey") -- Cor da plataforma (pode ser alterada)
-        platform.CFrame = cframe
-        platform.Parent = game.Workspace
-        return platform
-    end
-
-    -- Criar a plataforma
-    local platform = createPlatform()
-    wait(1)
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local humanoid = character:WaitForChild("Humanoid")
-
-    local newCFrame = CFrame.new(5597.26465, 181.799469, -146.706467, -0.435461491, 0.00667448156, 0.900182664, -1.16910187e-05, 0.999972463, -0.00742003508, -0.9002074, -0.00324165984, -0.435449421)
-
-    humanoid.RootPart.CFrame = newCFrame
-end    
-})
-
-TabTrolling:AddButton({
-        Name = "Jester All (Beta)",
-        Callback = function()
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-for i = 1, 40 do
-    local allPlayers = Players:GetPlayers()
-    local randomPlayer = allPlayers[math.random(1, #allPlayers)]
-
-    local args = {
-        [1] = "Ability3",
-        [2] = randomPlayer
-    }
-
-    ReplicatedStorage:WaitForChild("GeneralAbility"):FireServer(unpack(args))
-
-    -- Esperar 1.7 segundos antes da próxima iteração
-    wait(2)
-  end
-end    
-})
-
-TabMisc:AddToggle({
-        Name = "Null Spam",
-        Default = false,
-        Callback = function(Value)
-nullSpam = Value
-while nullSpam do
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer() 
-task.wait(10)
-          end
-        end    
-})
-
-TabMisc:AddButton({
-        Name = "GodMode (Need Golden)",
-        Callback = function()
-fireclickdetector(workspace.Lobby["Golden"].ClickDetector)
-wait(1)
-local jogador = game.Players.LocalPlayer
-local destinoCFrame = CFrame.new(-810.162292, 329.90097, 3.98657513, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-jogador.Character:SetPrimaryPartCFrame(destinoCFrame)
-wait(1)
-local args = {
-    [1] = true
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Goldify"):FireServer(unpack(args))
-end    
-})
-
-
-TabTeleports:AddButton({
-        Name = "Teleport To Plate",
-        Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Arena.Plate.CFrame
-          end    
-})
-
-
-TabBadges:AddToggle({
-        Name = "Brick Farm",
-        Default = false,
-        Callback = function(Value)
-BrickFarm = Value 
-while BrickFarm do
-game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,x)
-task.wait(1)
-  end
-end
-})
-
-
-TabMisc:AddToggle({
-        Name = "Spam Error Sound",
-        Default = false,
-        Callback = function(Value)
-errorSound = Value
-while errorSound do
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer() 
-task.wait(2)
-  end
-end 
-})
-
-TabTrolling:AddButton({
-        Name = "Kick Random Player",
-        Callback = function()
-local position = CFrame.new(-732.574097, 306.27005, -1.09629261, -0.0223243386, 0.0153695755, -0.999632657, -2.04585031e-05, 0.999881864, 0.0153738642, 0.999750793, 0.000363676081, -0.0223213844)
-local transparency = 0.2
-
-local part = Instance.new("Part")
-part.Size = Vector3.new(100, 1.5, 100) -- Tamanho da plataforma
-part.Position = position.p -- Posição da plataforma
-part.Anchored = true -- A plataforma está ancorada
-part.Transparency = transparency -- Definir transparência
-part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
-wait(2)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
-local newCFrame = CFrame.new(-723.266052, 310.018982, -0.0775156692, -0.473462105, -9.27528063e-08, -0.880814195, -2.28346426e-08, 1, -9.30292359e-08, 0.880814195, -2.39327402e-08, -0.473462105)
-
-humanoid.RootPart.CFrame = newCFrame
-wait(0.5)
-local args = {
-    [1] = game:GetService("Players").LocalPlayer.Character.Recall,
-    [2] = Vector3.new(55.76399230957031, -5.172937870025635, 45.26799011230469)
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Recall"):InvokeServer(unpack(args))
-
-wait(2.4)
--- Função para obter um jogador aleatório no servidor
-local function GetRandomPlayer()
-    local players = game.Players:GetPlayers()
-    local randomIndex = math.random(1, #players)
-    return players[randomIndex]
-end
-
--- Função para teleportar um jogador para outro jogador aleatório
-local function TeleportToRandomPlayer(player)
-    local randomPlayer = GetRandomPlayer()
-    if randomPlayer then
-        player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-    else
-        print("Nenhum jogador disponível para teleportar.")
-    end
-end
-
--- Teleportar o jogador para uma pessoa aleatória quando o script é executado
-local player = game.Players.LocalPlayer
-if player then
-    TeleportToRandomPlayer(player)
-else
-    print("Não foi possível encontrar o jogador local.")
-  end
-end    
-})
-
-
-TabBadges:AddDropdown({
-        Name = "Elude Keypad",
-        Default = "1",
-        Options = {"1 Player", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players", "7 Players", "8 Players", "9 Players", "10 Players", "11 Players", "12 Players", "13 Players", "14 Players"},
-        Callback = function(Value)
-if Value == "1 Player" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["8"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "2 Players" then 
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["4"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "3 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["6"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["8"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "4 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["9"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "5 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["2"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["8"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "6 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["2"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["4"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "7 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["2"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["6"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "8 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["2"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["9"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "9 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["8"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "10 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["4"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "11 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["6"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["8"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "12 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["9"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "13 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["4"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["8"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-elseif Value == "14 Players" then
-fireclickdetector(workspace.Keypad.Buttons["1"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["4"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["4"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["3"].ClickDetector)
-wait(0.5)
-fireclickdetector(workspace.Keypad.Buttons["Enter"].ClickDetector)
-  end
-end    
-})
-
-
-TabTeleports:AddDropdown({
-    Name = "Teleport",
-    Default = "Choose A Place",
-    Options = {"Choose A Place", "Arena", "Slapple", "Cannon", "Lobby", "Default Island", "Tournament"},
-    Callback = function(Value)
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        if Value == "Arena" then 
-            local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-        elseif Value == "Slapple" then
-            local cframe = CFrame.new(-392.199005, 52.260437, -11.50669, -0.0686506107, 0.0031023256, -0.99763602, -5.76306866e-06, 0.999995291, 0.00311006, 0.997640789, 0.000219268302, -0.0686502606)
-            character:SetPrimaryPartCFrame(cframe)
-        elseif Value == "Choose A Place" then
-            print("Escolha um local para teleportar.")
-        elseif Value == "Cannon" then
-            local cframe = CFrame.new(263.296326, 35.1829185, 195.506088, 0.648741186, -0.00185392145, 0.761006892, -3.16862497e-06, 0.99999702, 0.00243883952, -0.761009097, -0.00158458925, 0.648739219)
-            character:SetPrimaryPartCFrame(cframe)
-        elseif Value == "Lobby" then
-            local cframe = CFrame.new(-795.934753, 329.274933, -1.03634119, 0.148197666, 0.00229916582, -0.988955081, -2.76089145e-06, 0.999997318, 0.00232442468, 0.988957763, -0.00034175007, 0.148197278)
-            character:SetPrimaryPartCFrame(cframe)
-        elseif Value == "Default Island" then
-            local cframe = CFrame.new(131.374573, 361.482452, -6.89128542, -0.945504069, -0.000790083141, -0.325609207, -8.7355096e-07, 0.999997079, -0.00242393324, 0.325610131, -0.00229155412, -0.945501328)
-            character:SetPrimaryPartCFrame(cframe)
-         elseif Value == "Tournament" then
-            local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
-            character:SetPrimaryPartCFrame(cframe)
-        end
-    end
-})
-
-
-TabTrolling:AddButton({
-	Name = "Tp Player to Void",
-	Callback = function()
-local position = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -0.266344607, -0.74628818, -0.0209113024, 0.936077535, -0.351171732, 0.792116284, 0.229824781, 0.565448761)
-local transparency = 1
-
-local part = Instance.new("Part")
-part.Size = Vector3.new(100, 1.5, 100) -- Tamanho da plataforma
-part.Position = position.p -- Posição da plataforma
-part.Anchored = true -- A plataforma está ancorada
-part.Transparency = transparency -- Definir transparência
-part.Parent = game.Workspace -- Colocar a plataforma no espaço de trabalho
-wait(0.3)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
-local newCFrame = CFrame.new(3269.08154, -49616.5977, 3432.50122, 0.610011876, -0.266344607, -0.74628818, -0.0209113024, 0.936077535, -0.351171732, 0.792116284, 0.229824781, 0.565448761)
-
-humanoid.RootPart.CFrame = newCFrame
-wait(0.5)
-game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-wait(1)
-OrionLib:MakeNotification({
-	Name = "Done",
-	Content = "Player got teleported to void , you need to wait until he leaves or you will get trapped. (Use Esp To know the user ) He should be 50000+ meters from Arena",
-	Image = "rbxassetid://4483345998",
-	Time = 5
-})
-
-end    
-})
-
-TabBadges:AddButton({
-	Name = "Get Brazil Badge",
-	Callback = function()
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Brazil.portal.TouchInterest.Parent, 0)
-end    
-})
-
-
-TabBadges:AddButton({
-	Name = "Get Orange Badge",
-	Callback = function()
-fireclickdetector(workspace.Arena.island5["Orange"].ClickDetector)
-end   
-})
-
-
-TabTrolling:AddButton({
-        Name = "Teleport Player to Tournament",
-        Callback = function()
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
-
-character:SetPrimaryPartCFrame(cframe)
-wait(0.5)
-game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-wait(1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
-
-character:SetPrimaryPartCFrame(cframe)
-wait(0.5)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer() 
-end    
-})
-
-TabTrolling:AddButton({
-	Name = "Bring Player to Hunter Arena",
-	Callback = function()
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(17896.1797, -128.664368, -3544.22412, -0.999756634, -0.000100836049, -0.0220624395, -3.8296148e-06, 0.999990463, -0.00439669611, 0.0220626704, -0.00439554127, -0.999746978)
-
-character:SetPrimaryPartCFrame(cframe)
-wait(1)
-game:GetService("ReplicatedStorage"):WaitForChild("SLOC"):FireServer()
-
-  end    
-})
-
-TabMain:AddButton({
-	Name = "Esp (Ugly)",
-	Callback = function()
-local function calcularDistancia(ponto1, ponto2)
-    return (ponto1 - ponto2).magnitude
-end
-
--- FunÃ§Ã£o para exibir a posiÃ§Ã£o e a distÃ¢ncia dos jogadores
-local function mostrarPosicaoJogadores()
-    local jogadorLocal = game.Players.LocalPlayer
-    local posicaoLocal = jogadorLocal.Character.HumanoidRootPart.Position
-    
-    for _, jogador in ipairs(game.Players:GetPlayers()) do
-        if jogador ~= jogadorLocal and jogador.Character and jogador.Character:FindFirstChild("HumanoidRootPart") then
-            local posicaoJogador = jogador.Character.HumanoidRootPart.Position
-            local distancia = calcularDistancia(posicaoLocal, posicaoJogador)
-            
-            -- Verificar se o jogador possui uma tag de distÃ¢ncia
-            local tag = jogador.Character:FindFirstChild("DistanceTag")
-            if not tag then
-                -- Criar uma nova tag se nÃ£o existir
-                tag = Instance.new("BillboardGui")
-                tag.Name = "DistanceTag"
-                tag.Parent = jogador.Character
-                tag.Size = UDim2.new(0, 100, 0, 50)
-                tag.StudsOffset = Vector3.new(0, 3, 0) -- Ajuste a altura da tag
-                tag.AlwaysOnTop = true
-                
-                -- Texto da tag com a distÃ¢ncia e o nome do jogador
-                local texto = Instance.new("TextLabel")
-                texto.Parent = tag
-                texto.Size = UDim2.new(1, 0, 1, 0)
-                texto.TextColor3 = Color3.fromRGB(0, 255, 0) -- Verde
-                texto.TextScaled = true
-                texto.TextXAlignment = Enum.TextXAlignment.Center
-            end
-            
-            -- Atualizar o texto da tag com a distÃ¢ncia e o nome do jogador
-            tag.TextLabel.Text = jogador.Name .. "\n" .. string.format("%.2f meters", distancia)
-        end
-    end
-end
-
--- Conectar a funÃ§Ã£o de atualizaÃ§Ã£o ao evento Heartbeat
-game:GetService("RunService").Heartbeat:Connect(function()
-    mostrarPosicaoJogadores()
-  end)
-end    
-})
-
-
-TabMain:AddButton({
-	Name = "Fly Script (Credits to idk)",
-	Callback = function()
-loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\103\105\115\116\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\101\111\122\111\110\101\89\84\47\98\102\48\51\55\100\102\102\57\102\48\97\55\48\48\49\55\51\48\52\100\100\100\54\55\102\100\99\100\51\55\48\47\114\97\119\47\101\49\52\101\55\52\102\52\50\53\98\48\54\48\100\102\53\50\51\51\52\51\99\102\51\48\98\55\56\55\48\55\52\101\98\51\99\53\100\50\47\97\114\99\101\117\115\37\50\53\50\48\120\37\50\53\50\48\102\108\121\37\50\53\50\48\50\37\50\53\50\48\111\98\102\108\117\99\97\116\111\114\39\41\44\116\114\117\101\41\41\40\41\10\10")()
-end    
-})
-
-
-TabTeleports:AddButton({
-	Name = "No Oneshot Gamemode",
-	Callback = function()
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport3.TouchInterest.Parent, 0)
-end    
-})
-
-
-TabTeleports:AddButton({
-	Name = "Join Arena (Lobby Only)",
-	Callback = function()
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
-end    
-})
-
-
-TabTrolling:AddButton({
-	Name = "Freeze Random (Need Frostbite)",
-	Callback = function()
-local function GetRandomPlayer()
-    local players = game.Players:GetPlayers()
-    local randomIndex = math.random(1, #players)
-    return players[randomIndex]
-end
-
--- Função para teleportar um jogador para outro jogador aleatório
-local function TeleportToRandomPlayer(player)
-    local randomPlayer = GetRandomPlayer()
-    if randomPlayer then
-        player.Character:SetPrimaryPartCFrame(randomPlayer.Character.PrimaryPart.CFrame)
-    else
-        print("Nenhum jogador disponível para teleportar.")
-    end
-end
-
--- Teleportar o jogador para uma pessoa aleatória quando o script é executado
-local player = game.Players.LocalPlayer
-if player then
-    TeleportToRandomPlayer(player)
-else
-    print("Não foi possível encontrar o jogador local.")
-end
-wait(0.2)
-local args = {
-    [1] = 0.013125000614672899
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("GeneralAbility"):FireServer(unpack(args))
-
-wait(1)
-            local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-end    
-})
-
-
-TabTrolling:AddToggle({
-	Name = "Destroy Server (This can get you banned)",
-	Default = false,
-	Callback = function(Value)
-DestroyServer = Value
-while DestroyServer do
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-  wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-392.199005, 52.260437, -11.50669, -0.0686506107, 0.0031023256, -0.99763602, -5.76306866e-06, 0.999995291, 0.00311006, 0.997640789, 0.000219268302, -0.0686502606)
-            character:SetPrimaryPartCFrame(cframe)
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(263.296326, 35.1829185, 195.506088, 0.648741186, -0.00185392145, 0.761006892, -3.16862497e-06, 0.99999702, 0.00243883952, -0.761009097, -0.00158458925, 0.648739219)
-            character:SetPrimaryPartCFrame(cframe)
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(131.374573, 361.482452, -6.89128542, -0.945504069, -0.000790083141, -0.325609207, -8.7355096e-07, 0.999997079, -0.00242393324, 0.325610131, -0.00229155412, -0.945501328)
-            character:SetPrimaryPartCFrame(cframe)
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(3417.19458, 83.9930954, 2.8145473, -0.103299014, -0.00704767602, -0.99462539, -1.18029084e-05, 0.999975026, -0.00708435476, 0.994650424, -0.000720054784, -0.103296511)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
- local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-4.41874456, -3.65609717, -177.127335, 0.530886769, -0.00534344791, -0.847425938, -9.22042273e-06, 0.999980092, -0.00631115772, 0.847442806, 0.00335832662, 0.53087616)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(35.4321899, -3.67293763, -81.2292862, -0.673177004, 0, -0.739481449, 0, 1.00000012, 0, 0.739481449, 0, -0.673177004)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(65.8015289, -3.67313337, -5.45897055, -0.924592316, 0.000140136486, -0.380958259, -2.02335315e-07, 0.99999994, 0.000368396344, 0.380958319, 0.000340701692, -0.924592137)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-96.9768829, -3.68479776, -15.548563, -0.561696172, 0.00527838478, 0.827326775, -9.48045999e-06, 0.999979615, -0.00638634898, -0.827343583, -0.00359502505, -0.561684668)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-212.338409, -3.80755782, -1.79173529, -0.436284453, 0.00210061227, -0.899806321, -7.24073197e-06, 0.999997258, 0.00233800872, 0.899808824, 0.00102653052, -0.436283261)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(66.5211716, -3.68304896, 51.6583672, 0.999495745, -0.000180488845, -0.031752333, -7.9770889e-06, 0.999982357, -0.00593521679, 0.0317528434, 0.0059324773, 0.999478102)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(32.8925018, -3.68992615, 79.2181015, -0.459032267, 0.00643137656, 0.888396382, -1.23377831e-05, 0.999973893, -0.00724549498, -0.888419628, -0.00333687454, -0.459020138)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-15.7492685, -3.67411065, 62.8903618, 0.735257268, -0.00149619766, 0.677786529, -2.33467858e-06, 0.999997675, 0.00221000356, -0.677788198, -0.00162650354, 0.73525548)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-73.728508, -3.68275738, 35.6343575, 0.899922609, 0.00256221951, 0.436042219, -7.73211468e-06, 0.999982834, -0.0058600232, -0.436049789, 0.00527019473, 0.899907053)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-84.5807877, -3.70551586, -5.40603018, 0.701478124, 0.00039245229, -0.71269089, -1.341288e-06, 0.999999821, 0.000549351156, 0.712690949, -0.000384408311, 0.701478004)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-22.7263699, -3.67834139, 10.0932884, 0.349514067, -0.00394687243, -0.936922848, -3.40296856e-06, 0.999991119, -0.00421382533, 0.936931133, 0.00147598411, 0.349510968)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-1.6882391, -3.70633173, -74.3923874, -0.925445616, 0.00175141764, 0.378876507, -9.94363404e-07, 0.999989271, -0.00462503685, -0.37888056, -0.00428059651, -0.925435662)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.2)
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-wait(0.2)
-game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
-wait(0.2)
-  game:GetService("ReplicatedStorage"):WaitForChild("ErrorDeath"):FireServer()
-wait(0.5)
-
-   end
-end    
-})
-
-
-
-TabMisc:AddToggle({
-	Name = "Push Lobby Players (Tip: Use Invisibility)",
-	Default = false,
-	Callback = function(Value)
-PushPlayer = Value
-while PushPlayer do
-fireclickdetector(workspace.Lobby["Pusher"].ClickDetector)
-wait(0.1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(-821.022644, 329.341156, -2.04819012, -0.0186797082, -0.00294048851, -0.999821246, -1.33748063e-06, 0.999995708, -0.00294097653, 0.999825537, -5.3597214e-05, -0.0186796319)
-
-character:SetPrimaryPartCFrame(cframe) 
-wait(0.1)
-game:GetService("ReplicatedStorage").PusherWall:FireServer() 
-wait(7)
-  end
-end    
-})
-
-
-
-TabMisc:AddTextbox({
-	Name = "Kill Player Rob",
-	Default = "UserHere",
-	TextDisappear = false,
-	Callback = function(Value)
-KillPlr = Value
-end	  
-})
-
-
-TabMisc:AddButton({
-	Name = "Kill Player",
-	Callback = function()
-game:GetService("ReplicatedStorage").rob:FireServer()
-    wait(4.5)
-
-        local Player = game.Players:FindFirstChild(KillPlr)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-  end
-end    
-})
-
-
-TabMisc:AddTextbox({
-	Name = "WalkSpeed",
-	Default = "Number",
-	TextDisappear = false,
-	Callback = function(Value)
-SpeedSet = Value
-	end	  
-})
-
-TabMisc:AddButton({
-	Name = "Set Speed",
-	Callback = function()
-local player = game.Players.LocalPlayer
-local novaVelocidade = SpeedSet
-
-if player then
-    local character = player.Character or player.CharacterAdded:Wait()
-    if character then
-        local humanoid = character:WaitForChild("Humanoid")
-        humanoid.WalkSpeed = novaVelocidade
-    end
-end
-  	end    
-})
-
-TabMisc:AddTextbox({
-	Name = "Jumppower",
-	Default = "Number",
-	TextDisappear = false,
-	Callback = function(Value)
-JumpSet = Value
-	end	  
-})
-
-
-TabMisc:AddButton({
-	Name = "Set Jumppower",
-	Callback = function()
-local player = game.Players.LocalPlayer
-local newJumpPower = JumpSet
-
-if player then
-    local character = player.Character or player.CharacterAdded:Wait()
-    if character then
-        local humanoid = character:WaitForChild("Humanoid")
-        humanoid.JumpPower = newJumpPower
-    end
-end
-end    
-})
-
-
-
-TabTrolling:AddTextbox({
-    Name = "Jet Player",
-    Default = "User",
-    TextDisappear = false,
-    Callback = function(Value)
-        JetTarget = Value
-    end
-})
-
-TabTrolling:AddButton({
-    Name = "Start Jet",
-    Callback = function()
-        local Player = game.Players:FindFirstChild(JetTarget)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-
-wait(0.2)
-
-        local args = {
-            [1] = game.Players[JetTarget].Character
-        }
-
-        game:GetService("ReplicatedStorage").AirStrike:FireServer(unpack(args))
-wait(0.2)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-  end
-end
-})
-
-
-TabTrolling:AddTextbox({
-    Name = "Track Player",
-    Default = "User",
-    TextDisappear = false,
-    Callback = function(Value)
-        TrackPlr = Value
-    end
-})
-
-TabTrolling:AddButton({
-    Name = "Start Track",
-    Callback = function()
-      local args = {
-            [1] = game.Players[TrackPlr].Character
-        }
-
-        game:GetService("ReplicatedStorage").GeneralAbility:FireServer(unpack(args))
-
-    end
-})
-
-TabTrolling:AddTextbox({
-    Name = "Sbeve Player",
-    Default = "User",
-    TextDisappear = false,
-    Callback = function(Value)
-        SbavePlr = Value
-    end
-})
-
-TabTrolling:AddButton({
-    Name = "Start Sbave",
-    Callback = function()
-game:GetService("ReplicatedStorage").KrakenArm:FireServer()
-wait(0.2)
-        local Player = game.Players:FindFirstChild(SbavePlr)
-        if Player then
-            game.Players.LocalPlayer.Character:MoveTo(Player.Character.HumanoidRootPart.Position)
-  end
-end
-})
-
-
-TabTrolling:AddButton({
-	Name = "Sbeve All",
-	Callback = function()
-game:GetService("ReplicatedStorage").KrakenArm:FireServer()
-
-wait(0.5)
-local players = game:GetService("Players")
-local teleportInterval = 0.2
-
-local function teleportToPlayer(player)
-    game.Players.LocalPlayer.Character:MoveTo(player.Character.HumanoidRootPart.Position)
-end
-
-local function teleportToAllPlayers()
-    for _, player in ipairs(players:GetPlayers()) do
-        if player ~= game.Players.LocalPlayer then
-            teleportToPlayer(player)
-            wait(teleportInterval)
-        end
-    end
-end
-
-teleportToAllPlayers()
-wait(1)
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
-local cframe = CFrame.new(40.6329346, -3.69798946, 17.1903038, 0.172667935, -0.0038329165, 0.984972656, -1.42282324e-05, 0.99999243, 0.00389386038, -0.984980106, -0.00068636972, 0.172666565)
-            character:SetPrimaryPartCFrame(cframe)
-end    
-})
-
-
-
-TabCredits:AddParagraph("Made By Aquoupi","Credits to Bacon Scripter and GiangMc for helping.")
-
-TabLogs:AddParagraph("Update 10.6","Added Sbave Player and Sbave all ")
-
-
-
-
