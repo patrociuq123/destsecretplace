@@ -50,7 +50,7 @@ TabKASystem:AddButton({
 
             -- Tab
             local TabAdminPanel = Window:MakeTab({
-                Name = "Painel Administrador",
+                Name = "Painel Admin",
                 Icon = "rbxassetid://4483345998",
                 PremiumOnly = false
             })
