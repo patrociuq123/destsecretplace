@@ -137,7 +137,7 @@ TabKASystem:AddButton({
 if PlayerNot then
                     OrionLib:MakeNotification({
                         Name = "Warning",
-                        Content = player.Name .. " joined the server. Slaps: " .. player.leaderstats.Slaps.Value,
+                        Content = player.Name .. " joined the server. Slaps: ",
                         Image = "rbxassetid://4483345998",
                         Time = 5
                     })
