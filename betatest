@@ -137,7 +137,7 @@ TabKASystem:AddButton({
 if PlayerNot then
                     OrionLib:MakeNotification({
                         Name = "Warning",
-                        Content = player.Name .. " joined the server. Slaps: ",
+                        Content = player.Name .. " joined the server. ",
                         Image = "rbxassetid://4483345998",
                         Time = 5
                     })
@@ -163,6 +163,53 @@ if PlayerNot then
                 Image = "rbxassetid://4483345998",
                 Time = 5
             })
+
+local coreGuiService = game:GetService("CoreGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = coreGuiService
+
+local button = Instance.new("TextButton")
+button.Text = "🔥"
+button.Size = UDim2.new(0, 50, 0, 50)
+button.Position = UDim2.new(0.5, -25, 0, 10) -- Posição ajustada para o centro superior
+button.AnchorPoint = Vector2.new(0.5, 0)
+button.Font = Enum.Font.FredokaOne
+button.TextSize = 20
+button.TextColor3 = Color3.new(1, 1, 1)
+button.BackgroundColor3 = Color3.new(0, 0, 0)
+button.BorderSizePixel = 0
+button.Draggable = true
+
+button.Parent = screenGui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 10) -- Define o raio da borda
+corner.Parent = button
+
+local function toggleFramesVisibility()
+    local orionGui = coreGuiService:FindFirstChild("Orion")
+    if orionGui then
+        local frames = orionGui:GetChildren()
+        local frameCount = 0
+        
+        for _, frame in ipairs(frames) do
+            if frame:IsA("Frame") and frame.Name == "Frame" then
+                frameCount = frameCount + 1
+                frame.Visible = not frame.Visible
+            end
+        end
+        
+        if frameCount == 0 then
+            print("Nenhuma frame com o nome 'Frame' encontrada.")
+        end
+    else
+        print("Orion não encontrado.")
+    end
+end
+
+button.MouseButton1Click:Connect(toggleFramesVisibility)
+
         end
     end
 })
