@@ -1,1 +1,174 @@
--- This script has been discontinued
+local KeyURL = "https://raw.githubusercontent.com/Usehsbd/DestroyerHub/main/Uhtheuhtheuhuhuh.lua"
+local KeyContent = game:HttpGet(KeyURL)
+
+local function trim(s)
+    return s:match("^%s*(.-)%s*$")
+end
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+
+local Window = OrionLib:MakeWindow({
+    Name = "Destroyer Admin Key System",
+    HidePremium = false,
+    IntroEnabled = true,
+    IntroText = "Dest Admin",
+    SaveConfig = true,
+    ConfigFolder = "DestroyerHubAdmin"
+})
+
+-- Tab
+local TabKASystem = Window:MakeTab({
+    Name = "Key System",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local KeyKA = "" -- Variável para armazenar a chave digitada pelo usuário
+
+TabKASystem:AddTextbox({
+    Name = "Enter Key",
+    Default = "Key",
+    TextDisappear = false,
+    Callback = function(Value)
+        KeyKA = trim(Value)
+    end
+})
+
+-- Button 
+TabKASystem:AddButton({
+    Name = "Check Key",
+    Callback = function()
+        if trim(KeyKA) == trim(KeyContent) then
+            local Window = OrionLib:MakeWindow({
+                Name = "Bem vindo de volta "..game.Players.LocalPlayer.Name,
+                HidePremium = false,
+                IntroEnabled = true,
+                IntroText = "Dest Admin",
+                SaveConfig = true,
+                ConfigFolder = "DestroyerHubAdmin"
+            })
+
+            -- Tab
+            local TabAdminPanel = Window:MakeTab({
+                Name = "Painel Administrador",
+                Icon = "rbxassetid://4483345998",
+                PremiumOnly = false
+            })
+
+            TabAdminPanel:AddButton({
+                Name = "Slap Farm de Beatdown",
+                Callback = function()
+                    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+                    local Players = game:GetService("Players")
+
+                    while true do
+                        local player = Players.LocalPlayer
+                        local character = player.Character or player.CharacterAdded:Wait()
+
+                        while character do
+                            local cframe = CFrame.new(17896.1797, -128.664368, -3544.22412, -0.999756634, -0.000100836049, -0.0220624395, -3.8296148e-06, 0.999990463, -0.00439669611, 0.0220626704, -0.00439554127, -0.999746978)
+                            character:SetPrimaryPartCFrame(cframe)
+                            wait(0.5)
+
+                            for i = 1, 1000 do
+                                ReplicatedStorage:WaitForChild("GeneralAbility"):FireServer()
+                                wait(0.000000000001)
+
+                                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                                if humanoidRootPart then
+                                    local args = {
+                                        [1] = "standhit",
+                                        [2] = {
+                                            ["cf"] = humanoidRootPart.CFrame,
+                                            ["hit"] = humanoidRootPart
+                                        }
+                                    }
+                                    ReplicatedStorage:WaitForChild("beatdownevent"):FireServer(unpack(args))
+                                else
+                                    print("HumanoidRootPart não encontrado no personagem do jogador local.")
+                                end
+                            end
+
+                            character = player.Character or player.CharacterAdded:Wait()
+                        end
+
+                        wait(6)
+                    end
+                end
+            })
+
+            local AntiRec = false
+
+            TabAdminPanel:AddToggle({
+                Name = "Anti-Record (Instantly quit)",
+                Default = false,
+                Callback = function(Value)
+                    AntiRec = Value
+                end
+            })
+
+            local PlayerNot = true
+
+            TabAdminPanel:AddToggle({
+                Name = "Notify New Player",
+                Default = true,
+                Callback = function(Value)
+                    PlayerNot = Value
+                end
+            })
+
+            local function checkForSpecificWords(message)
+                local wordsToCheck = {"rec", "recording", "recorded", "hacker", "hack", "grava", "report on dc", "record this guy", "Hacker", "Hacking", "grava", "Grava", "script", "scripter", "Scripter", "Script", "Exploit", "Exploiter", "exploit", "exploiter", "exploiting"}
+                message = string.lower(message)
+                for _, word in ipairs(wordsToCheck) do
+                    if string.find(message, word) then
+                        return true
+                    end
+                end
+                return false
+            end
+
+            local function kickLocalPlayer()
+                game.Players.LocalPlayer:Kick("Someone try to report u, but I protected you :)")
+            end
+
+            -- Conectar a função de notificação ao evento PlayerAdded
+            game.Players.PlayerAdded:Connect(function(player)
+if PlayerNot then
+                    OrionLib:MakeNotification({
+                        Name = "Warning",
+                        Content = player.Name .. " joined the server. Slaps: " .. player.leaderstats.Slaps.Value,
+                        Image = "rbxassetid://4483345998",
+                        Time = 5
+                    })
+                end
+            end)
+
+            while true do
+                if AntiRec then
+                    for _, player in ipairs(game.Players:GetPlayers()) do
+                        player.Chatted:Connect(function(message)
+                            if checkForSpecificWords(message) then
+                                kickLocalPlayer()
+                            end
+                        end)
+                    end
+                end
+                wait(1)
+            end
+        else
+            OrionLib:MakeNotification({
+                Name = "Ops",
+                Content = "Wrong key or you don't have access to Admin Hub",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+if game.Players.LocalPlayer.Name == "pedrobbbgamerr" then
+    setclipboard(KeyContent)
+else 
+    print("Put the key here")
+end
