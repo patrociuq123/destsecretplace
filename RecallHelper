@@ -1,0 +1,79 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Destroyer Hub | Recall Help", HidePremium = false, IntroEnabled = false, SaveConfig = true, ConfigFolder = "DestRecHelp"})
+
+
+
+local TabHelper = Window:MakeTab({
+        Name = "Helper",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+})
+
+TabHelper:AddLabel("Your Account Age: " .. game.Players.LocalPlayer.AccountAge)
+
+local PlayerCounting = TabHelper:AddLabel("Players in the server: " .. #game.Players:GetPlayers())
+
+
+
+TabHelper:AddParagraph("Question","When was Slap Battles first published?   16/2/2021 ")
+TabHelper:AddParagraph("Question","What glove costs 9750 slaps?   Coil")
+
+TabHelper:AddParagraph("Question","What is the chance of getting bob from Replica?   1/7500 ")
+
+TabHelper:AddParagraph("Question","How many gloves stands are in Slap Battles right now?  172 (Last Updated: May 17, 2024) ")
+
+TabHelper:AddParagraph("Question","What is the badge name for the Glitch glove?    01010010 01010101 01001110")
+
+TabHelper:AddParagraph("Question","If 1=3 2=3 3=5 4=4 5=4 6=?     3")
+
+TabHelper:AddParagraph("Question","Whom ultimately controls this realm?    Tencelll")
+
+TabHelper:AddParagraph("Question","How many slaps do you have?")
+
+TabHelper:AddLabel("Slaps: " .. game.Players.LocalPlayer.leaderstats.Slaps.Value)
+
+TabHelper:AddParagraph("Question","How many players were present in this server when you were sent here?     Count the player before you join here")
+
+TabHelper:AddParagraph("Question","What colour is your name in the Roblox Chat?   Put the closest color of your chat name color")
+
+TabHelper:AddParagraph("Question","What has a bottom at the top?   Type in chat : A leg")
+
+TabHelper:AddParagraph("Question","Did you forget that you repressed your memories?    Yes")
+
+TabHelper:AddParagraph("Question","Do you know who I am?     A forgotten memory")
+
+TabHelper:AddParagraph("Question","What has 4 fingers and one thumb but is not alive?      Type in chat : Glove")
+
+TabHelper:AddParagraph("Question","What glove can't you hit when it isn't there?     Elude")
+
+TabHelper:AddParagraph("Question","We will play Simon Says at the end, do you understand?    Yes")
+
+TabHelper:AddLabel("--Simon Says")
+
+TabHelper:AddParagraph("Simon Says","You only do something if he says Simon Says , else go to portal")
+
+TabHelper:AddParagraph("Question","Simon says if you seek for the reward, dance on top of the entities head.     Dance on top of the clone's head (by typing /e dance)")
+
+TabHelper:AddParagraph("Question","Simon says walk through the portal to claim your reward    Self-explanatory. Walk through the portal if it says Simon says. Jump off the map if it doesn't say Simon says")
+
+TabHelper:AddParagraph("Question","Simon says jump off the map to claim your reward      Jump out of the map")
+
+TabHelper:AddParagraph("Question","Simon says if the reward is what you seek, You must dance on top of the Right/Left staircase Crystal.     If he says left type /e dance on the right crystal , if he says right  type /e dance on the left crystal")
+
+TabHelper:AddParagraph("Question","Simon says riddle me this and speak it out. What was four fingers and a thumb but isn’t alive?     Type 'a glove' in the chat")
+
+TabHelper:AddParagraph("Question","Simon says riddle me this and speak it out. What has a bottom at the top?    Type  'a leg' in the chat ")
+
+TabHelper:AddLabel("Good lucky")
+
+TabHelper:AddButton({
+  Name = "Close Gui",
+  Callback = function()
+  OrionLib:Destroy()
+end
+})
+
+game:GetService("RunService").RenderStepped:Connect(function()
+PlayerCounting:Set("Players in the server: " .. #game.Players:GetPlayers())
+     end)
