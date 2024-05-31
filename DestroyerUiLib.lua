@@ -296,7 +296,6 @@ end)
 CreateElement("Frame", function(Color)
 	local Frame = Create("Frame", {
 		BackgroundColor3 = Color or Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 0.3,
 		BorderSizePixel = 0
 
 	})
@@ -536,12 +535,10 @@ function OrionLib:MakeWindow(WindowConfig)
 		AddThemeObject(SetProps(MakeElement("Frame"), {
 			Size = UDim2.new(1, 0, 0, 10),
 			Position = UDim2.new(0, 0, 0, 0)
-			BackgroundTransparency = 0.3,
 		}), "Second"), 
 		AddThemeObject(SetProps(MakeElement("Frame"), {
 			Size = UDim2.new(0, 10, 1, 0),
 			Position = UDim2.new(1, -10, 0, 0)
-					BackgroundTransparency = 0.3,
 		}), "Second"), 
 		AddThemeObject(SetProps(MakeElement("Frame"), {
 			Size = UDim2.new(0, 1, 1, 0),
