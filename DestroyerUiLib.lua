@@ -650,7 +650,7 @@ function OrionLib:MakeWindow(WindowConfig)
 		UIHidden = true
 		OrionLib:MakeNotification({
 			Name = "Interface Hidden",
-			Content = "Tap RightShift to reopen the interface",
+			Content = "Destroyer Hub Hidden Click the fire button to open the interface",
 			Time = 5
 		})
 		WindowConfig.CloseCallback()
