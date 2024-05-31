@@ -296,8 +296,9 @@ end)
 CreateElement("Frame", function(Color)
 	local Frame = Create("Frame", {
 		BackgroundColor3 = Color or Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 0.3,
 		BorderSizePixel = 0
-		BackgroundTransparency = 0.3
+
 	})
 	return Frame
 end)
