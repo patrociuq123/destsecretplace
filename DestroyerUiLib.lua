@@ -801,7 +801,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			function ElementFunction:AddLabel(Text)
 				local LabelFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
 					Size = UDim2.new(1, 0, 0, 30),
-					BackgroundTransparency = 0.7,
+					BackgroundTransparency = 0.4,
 					Parent = ItemParent
 				}), {
 					AddThemeObject(SetProps(MakeElement("Label", Text, 15), {
